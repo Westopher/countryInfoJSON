@@ -27,8 +27,12 @@ class ViewController: UIViewController {
 //            let dataAsString = String(data: data, encoding: .utf8)
 //            print(dataAsString)
             do {
-                let jsonDescription = try JSONDecoder().decode(NameCapital.self, from: data)
-                print(jsonDescription)
+                let jsonDescription = try JSONDecoder().decode([NameCapital].self, from: data)
+                for i in jsonDescription {
+                    print(i.name)
+                }
+                
+                //print(jsonDescription)
             }
             catch let jsonError {
                 print("Json Error:", jsonError)

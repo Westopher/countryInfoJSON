@@ -12,9 +12,30 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+       
+        struct NameCapital: Decodable {
+            var name: String?
+            var capital: String?
+        }
+        
+        
+        guard let url = URL(string: "https://restcountries.eu/rest/v2/all?fields=name;capital;currencies") else {return}
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else {return}
+            
+//            let dataAsString = String(data: data, encoding: .utf8)
+//            print(dataAsString)
+            do {
+                let jsonDescription = try JSONDecoder().decode(NameCapital.self, from: data)
+                print(jsonDescription)
+            }
+            catch let jsonError {
+                print("Json Error:", jsonError)
+            }
+        }.resume()
+        
+        
     }
-
-
 }
 

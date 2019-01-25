@@ -12,10 +12,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         struct NameCapital: Decodable {
             var name: String?
             var capital: String?
+            var region: String?
         }
         
         
@@ -28,9 +29,13 @@ class ViewController: UIViewController {
 //            print(dataAsString)
             do {
                 let jsonDescription = try JSONDecoder().decode([NameCapital].self, from: data)
-                for i in jsonDescription {
-                    print(i.name)
-                }
+//                for i in jsonDescription {
+//                    print(i.name)
+//                    print(i.capital)
+//                    print(i.region)
+//                }
+                print(jsonDescription[0].capital)
+                
                 
                 //print(jsonDescription)
             }
